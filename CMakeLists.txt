@@ -25,3 +25,19 @@ add_executable(example4
   ${FLEX_Example4Scanner_OUTPUTS}
 )
 
+BISON_TARGET(Example5Parser example5.y ${CMAKE_CURRENT_BINARY_DIR}/example5.tab.c)
+FLEX_TARGET(Example5Scanner example5.l ${CMAKE_CURRENT_BINARY_DIR}/example5.yy.c)
+ADD_FLEX_BISON_DEPENDENCY(Example5Scanner Example5Parser)
+add_executable(example5 
+  ${BISON_Example5Parser_OUTPUTS} 
+  ${FLEX_Example5Scanner_OUTPUTS}
+)
+
+BISON_TARGET(Example6Parser example6.y ${CMAKE_CURRENT_BINARY_DIR}/example6.tab.c)
+FLEX_TARGET(Example6Scanner example6.l ${CMAKE_CURRENT_BINARY_DIR}/example6.yy.c)
+ADD_FLEX_BISON_DEPENDENCY(Example6Scanner Example6Parser)
+add_executable(example6 
+  ${BISON_Example6Parser_OUTPUTS} 
+  ${FLEX_Example6Scanner_OUTPUTS}
+)
+
