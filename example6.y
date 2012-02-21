@@ -4,29 +4,15 @@
 
 #define YYSTYPE char *
 
-int yydebug=0;
-
-void yyerror(const char *str)
-{
-	fprintf(stderr,"error: %s\n",str);
-}
-
-int yywrap()
-{
-	return 1;
-}
-
-main()
-{
-	yyparse();
-}
-
+int yydebug = 1;
 %}
 
+%union{
+    text char[256];  
+}
 %token WORD FILENAME QUOTE OBRACE EBRACE SEMICOLON ZONETOK FILETOK
 
 %%
-
 commands:
 	|	 
 	commands command SEMICOLON
@@ -40,7 +26,7 @@ command:
 zone_set:
 	ZONETOK quotedname zonecontent
 	{
-		printf("Complete zone for '%s' found\n",$2);
+		printf("Complete zone for '%s' found\n", $3);
 	}
 	;
 
@@ -77,3 +63,19 @@ statements:
 	;
 
 statement: WORD | block | quotedname
+%%
+
+void yyerror(const char *str)
+{
+	fprintf(stderr,"error: %s\n",str);
+}
+
+int yywrap()
+{
+	return 1;
+}
+
+void main(void)
+{
+	yyparse();
+}

@@ -1,7 +1,10 @@
 cmake_minimum_required (VERSION 2.8)
 project (lex_yacc_howto)
 
+set(CMAKE_CXX_FLAGS_DEBUG "-g")
+set(CMAKE_C_FLAGS_DEBUG "-g")
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
+
 find_package(BISON)
 find_package(FLEX)
 
